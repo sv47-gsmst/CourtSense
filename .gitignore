@@ -1,0 +1,24 @@
+# Virtual environment — regenerated automatically by run.bat
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated at runtime — not part of the source
+config.json
+session_*.json
+session*.csv
+session_report.html
+recording_*.avi
+session_trend.png
+
+# Optional racket-detection model (large binary, downloaded separately)
+models/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
