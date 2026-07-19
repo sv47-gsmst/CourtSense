@@ -14,8 +14,6 @@ session_report.html
 recording_*.avi
 session_trend.png
 
-# Optional racket-detection model (large binary, downloaded separately)
-models/
 
 # OS / editor junk
 .DS_Store
