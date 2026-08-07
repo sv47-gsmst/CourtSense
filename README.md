@@ -1,62 +1,47 @@
-# CourtSense 🎾
+# CourtSense
 
-Real-time human motion tracking and sports analytics using a single camera. No wearables or sensors required.
+CourtSense is a single-camera setup for tracking human motion and generating sports analytics. No wearables or sensors on the players — just a webcam.
 
-Runs in two independent modes:
-* **Warmup Mode** – Rep-counting workout tracker
-* **Analytics Mode** – Tennis/pickleball performance analysis
+There are two main modes, though you can only run one at a time.
 
-> **Note:** Warmup and Analytics cannot run simultaneously.
+## Warmup Mode
 
----
+This is a workout tracker that counts your reps. It uses joint angles to track squats, pushups, and bicep curls, and handles different movement speeds without breaking. There's a progress bar that grades your reps based on depth and tempo.
 
-## 🏋️‍♂️ Warmup Mode
-Counts squats, pushups, and curls using joint-angle tracking.
+You don't have to touch the keyboard to switch exercises — hold up one, two, or three fingers, or put your palms together. You can also tweak the camera settings for smoothing, tracking lock, and confidence thresholds.
 
-### Features
-* **Noise-Tolerant Detection:** Works with fast or slow movement.
-* **Rep Quality Bar:** Scores each rep on depth and tempo.
-* **Hand-Gesture Switching:** Hold up 1/2/3 fingers or bring palms together.
-* **Camera Tuning:** Confidence threshold, smoothing presets, tracking lock.
+## Analytics Mode
 
----
+This mode is built for tennis and pickleball, and tracks up to three people on the court.
 
-## 📊 Analytics Mode
-Tracks up to three players for tennis and pickleball.
+By tracking both the racket and the ball, it can classify whether you hit a forehand or a backhand. It also logs your footwork — jumps, split-steps, directional lunges — and calculates how often you do them per minute.
 
-### Features
-* **Stroke Detection:** Forehand/backhand classification, validated with ball + racket tracking.
-* **Footwork Tracking:** Split-steps, lunges (with direction), jumps; includes per-minute rates.
-* **Recovery Timing:** Measures time to return to ready stance after each shot.
-* **Rally Counting:** Current rally and longest rally.
-* **Stamina Trend:** Rolling intensity compared to early-session baseline.
-* **Ready-Stance Coaching:** Live feedback on knee bend and body lean.
-* **Court Heatmaps:** Camera-perspective and calibrated bird’s-eye view.
-* **Spoken Coaching Cues:** Offline text-to-speech.
-* **Session Recording:** Saves annotated video.
-* **Session History:** Logs every session; `review.py` shows long-term trends.
+It also measures recovery timing (how fast you get back to a ready stance after a shot), rally counts (current streak and longest of the session), and stamina (comparing your current movement intensity against your baseline from the start of the session). There's live stance feedback too, checking knee bend and body lean.
 
-> **Note:** All speed/distance metrics are normalized to torso-lengths per second (not raw pixels).
+Speed and distance are measured in torso-lengths per second instead of raw pixels, since that stays consistent regardless of how far you are from the camera.
 
----
+The tool generates court heatmaps from both the standard camera angle and a calibrated top-down view, and uses offline text-to-speech for coaching cues. Sessions save as annotated video files plus data logs — run `review.py` later to check your long-term trends.
 
-## 🧠 How It Works
-* **Pose & Hand Tracking:** MediaPipe Pose Landmarker + Hand Landmarker
-* **Ball Detection:** HSV color masking
-* **Racket Detection:** SSD MobileNet v2 (COCO) via OpenCV DNN
-* **Court Calibration:** Click 4 corners → homography → real-world coordinates
-* **Threaded Inference:** Pose detection runs on a background thread
-* **Confidence Gating:** Suppresses events when tracking quality drops
+## How It Works
 
----
+- MediaPipe handles the hand and pose landmarks.
+- OpenCV DNN runs an SSD MobileNet v2 model to detect the racket.
+- Ball tracking uses basic HSV color masking.
+- To calibrate the court, you click the four corners on screen. A homography matrix translates those pixels into real-world coordinates.
+- Pose inference runs on a background thread so it doesn't bottleneck the rest of the program.
+- If tracking confidence drops too low, the system just ignores those events instead of letting bad data mess up your stats.
 
-Note: ReadME was polished using AI
+## Setup
 
-## 🚀 Setup
+Create a virtual environment and activate it (Windows):
+
 ```bash
-# Create and activate virtual environment
 python -m venv venv
-venv\Scripts\activate   # Windows
+venv\Scripts\activate
+```
 
-# Install dependencies
+Then install the dependencies:
+
+```bash
 pip install -r requirements.txt
+```
