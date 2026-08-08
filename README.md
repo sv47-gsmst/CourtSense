@@ -47,6 +47,9 @@ Then grab the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-Once that is done, just run the script and pick a mode.
+Once that is done, just run the script (run.bat) and pick a mode.
+```bash
+python main.py
+```
 
 Side note: If your laptop only has 8GB of RAM, it will still work. Having all three tracking systems running at once might make your fan sound like a jet engine, but mine does it all the time and it survives just fine.
