@@ -48,6 +48,7 @@ Then grab the dependencies:
 pip install -r requirements.txt
 ```
 Once that is done, just run the script (run.bat) and pick a mode.
+Or run the following in your project location terminal. 
 ```bash
 python main.py
 ```
