@@ -7,13 +7,7 @@
 # less reliably. It's used as an extra signal alongside ball tracking
 # and wrist speed for stroke confirmation, not the only check, mostly
 # because of that gap.
-#
-# Needs two files that aren't bundled here (they're ~65MB, can't ship
-# binaries through chat) — frozen_inference_graph.pb and
-# ssd_mobilenet_v2_coco.pbtxt, both from the OpenCV DNN model zoo:
-# https://github.com/opencv/opencv_extra/tree/master/testdata/dnn
-# Drop them in models/. If they're missing, .available just stays
-# False and nothing else in the program is affected.
+
 
 import os
 import cv2
